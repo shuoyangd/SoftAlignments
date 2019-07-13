@@ -257,8 +257,9 @@ def main(argv):
             
     # Get rid of some junk
     if outputType == 'web' or outputType == 'compare':
-        webbrowser.open("http://127.0.0.1:47155/?directory=" + foldername)
-        os.system("php -S 127.0.0.1:47155 -t web")
+        # webbrowser.open("http://127.0.0.1:47155/?directory=" + foldername)
+        sys.stderr.write("visualize by visiting: {0}\n".format("http://cs.jhu.edu/~sding/alignviz/web/index.php"))
+        # os.system("php -S 127.0.0.1:8081 -t web")
     else:
         os.remove(folder + "/" + ntpath.basename(inputfile) + '.ali.js')
         os.remove(folder + "/" + ntpath.basename(inputfile) + '.src.js')
