@@ -178,6 +178,7 @@ def readNematus(filename, from_system = "Nematus", de_bpe = False):
                     alis.append(ali)
                     aliTXT = ''
                 lineparts = line.split(' ||| ')
+                # TODO: we don't have eos for meerkat
                 if from_system == "Nematus":
                     lineparts[1] += ' <EOS>'
                     lineparts[3] += ' <EOS>'
@@ -291,6 +292,9 @@ def processAlignments(data, folder, inputfile, outputType, num, refs=False):
                             #In case the source string is empty
                             if rawAli.ndim == 1:
                                 rawAli = np.array([rawAli])
+                            #In case both source & target string is both empty, or of length 1 without eos
+                            elif rawAli.ndim == 0:
+                                rawAli = np.array([[rawAli]])
                             ali = [l[:len(list(filter(None, tgt)))] for l in rawAli[:len(src)]]
                             
                             srcTotal = []
